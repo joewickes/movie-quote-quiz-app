@@ -57,7 +57,8 @@ const store = {
   ],
   quizStarted: false,
   questionNumber: 0,
-  score: 0
+  score: 0,
+  isCorrect: null,
 };
 
 /**
@@ -79,14 +80,66 @@ const store = {
 
 // These functions return HTML templates
 
+// START PAGE TEMPLATE
+function createStartPage() {
+
+}
+
+// QUESTION PAGE TEMPLATE
+function createQuestionPage() {
+  // The total questions to be asked
+  const total = store.questions.length;
+
+  // The current questionNumber
+  const qNum = store.questionNumber;
+
+  // Current question object
+  const current = store.questions[qNum - 1];
+
+  // The current score (total correct answers)
+  const correct = store.score;
+
+  // Incorrect score to return
+  // (question number - current question) - correctly answered questions
+  const incorrect = (qNum - 1) - correct;
+
+  return `<div class="question-page">
+    <h2>${current.question}</h2>
+    <form>
+      <label for="question">${current.answers[0]}</label>
+      <input type="radio" name="question" id="">
+      <label for="question">${current.answers[1]}</label>
+      <input type="radio" name="question" id="">
+      <label for="question">${current.answers[2]}</label>
+      <input type="radio" name="question" id="">
+      <label for="question">${current.answers[3]}</label>
+      <input type="radio" name="question" id="">
+      <button type="submit">Sumbit</button>
+    </form>
+          <p>correct: ${correct} and incorrect: ${incorrect}</p>
+          <p>Question ${qNum} out of ${total}</p>
+    </div>`;
+}
+
+// CORRECT PAGE TEMPLATE
+function createCorrectPage() {
+
+}
+
+// INCORRECT PAGE TEMPLATE
+function createIncorrectPage() {
+
+}
+
+// RESULTS PAGE TEMPLATE
+function createResultsPage() {
+  
+}
+
 /********** RENDER FUNCTION(S) **********/
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
-
-/********** EVENT HANDLER FUNCTIONS **********/
-
-// These functions handle events (submit, click, etc)
-
+// RENDER FUNCTION
 function render() {
   console.log('Rendering page...');
 
@@ -97,51 +150,70 @@ function render() {
   $('.display').html(renderedString);
 }
 
-// function createRenderString(obj) {
-//   const handledStart = handleStart();
+// WHICH TEMPLATE TO DISPLAY
+function createRenderString(obj) {
+  if (obj.quizStarted === false) {
+    // return start page
+    return createStartPage();
+  }
 
-//   const handledQuestionSubmit = handleSubmit();
+  // if there are more questions to be asked
+  if (obj.questionNumber <= obj.questions.length) {
+    if (obj.isCorrect === null) {
+      // return current question page
+      return createCurrentQuestionPage();
+    } else if (obj.isCorrect === true) {
+      // return correct page
+      return createCorrectPage();
+    } else if (obj.isCorrect === false) {
+      // return incorrect page
+      return createIncorrectPage();
+    }
+  }
 
-//   const handledNext = handleNext();
+  // else, return results page
+  return createResultsPage();
+}
 
-// }
+/********** EVENT HANDLER FUNCTIONS **********/
+
+// These functions handle events (submit, click, etc)
+
+// START EVENT HANDLER
+function handleStart() {
+  $('.display').on('submit', '#start', function() {
+    store.quizStarted === true;
+    render();
+  });
+}
+
+// SUBMIT EVENT HANDLER
+function handleSubmit() {
+  $('.display').on('submit', '#question', function() {
+    // check current answer against correct answer
+    // if the current answer is correct, change isCorrect to true
+    // if the current answer is wrong, change isCorrect to false
+    render();
+  });
+}
+
+// NEXT EVENT HANDLER
+function handleNext() {
+  $('.display').on('submit', '#next', function() {
+    store.questionNumber++;
+    // if there are more questions, display the next question
+    // if there aren't any more questions, display the results page
+  });
+}
+
+
 
 function main() {
   render();
+  handleStart();
+  handleSubmit();
+  handleNext();
 }
 
+// Wait for page to load
 $(main);
-
-
-// function createDisplayString(obj) {
-//   // if typeOfString === start
-//   // display start page
-//   if (obj.quizStarted === false) {
-//     return startPage();
-//   }
-
-//   obj.questionNumber++;
-//   return makeQuestionPage();
-// }
-
-// function makeQuestionPage() {
-//   const qNum = store.questionNumber;
-//   const current = store.questions[qNum - 1];
-//   const correct = store.score;
-//   const incorrect = (qNum - 1) - correct;
-//   return `<div class="question-page">
-//     <h2>${current.question}</h2>
-//     <form>
-//       <label for="question">${current.answers[0]}</label>
-//       <input type="radio" name="question" id="">
-//       <label for="question">${current.answers[1]}</label>
-//       <input type="radio" name="question" id="">
-//       <label for="question">${current.answers[2]}</label>
-//       <input type="radio" name="question" id="">
-//       <label for="question">${current.answers[3]}</label>
-//       <input type="radio" name="question" id="">
-//       <button type="submit">Sumbit</button>
-//     </form>
-//           <p>correct: ${correct} and incorrect: ${incorrect}</p>
-//     </div>`;
-// }
