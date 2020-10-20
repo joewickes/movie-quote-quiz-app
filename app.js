@@ -15,11 +15,11 @@ const store = {
       correctAnswer: 'Dirty Dancing',
     },
     {
-      question: 'My mama alwyas said life is like a box of ___',
+      question: 'My mama always said life is like a box of ___',
       answers: [
         'pasta',
         'sunshine',
-        'kitens',
+        'kittens',
         'chocolate'
       ],
       correctAnswer: 'chocolate'
@@ -79,10 +79,40 @@ const store = {
 
 // These functions return HTML templates
 
+// START PAGE
+
+function startPage(){
+  let startPage = ` 
+    <div class="start-page">
+    <h2>Are you ready?</h2>
+    <form>
+       <button id="start" type="submit" >Let's Go!</button>
+     </form>
+    </div>`;
+    return startPage
+}
+
+//QUESTION PAGE
+
+
 /********** RENDER FUNCTION(S) **********/
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
 
+function handleStartPage (){
+  $('main').on('click', '#start', function(){
+    store.quizStarted === true;
+    render();
+  })
+}
+
+
+
+
+
+
+
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
