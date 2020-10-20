@@ -86,3 +86,62 @@ const store = {
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
+function render() {
+  console.log('Rendering page...');
+
+  const renderedString = createRenderString(store);
+  console.log(renderedString);
+
+  // insert html into DOM
+  $('.display').html(renderedString);
+}
+
+// function createRenderString(obj) {
+//   const handledStart = handleStart();
+
+//   const handledQuestionSubmit = handleSubmit();
+
+//   const handledNext = handleNext();
+
+// }
+
+function main() {
+  render();
+}
+
+$(main);
+
+
+// function createDisplayString(obj) {
+//   // if typeOfString === start
+//   // display start page
+//   if (obj.quizStarted === false) {
+//     return startPage();
+//   }
+
+//   obj.questionNumber++;
+//   return makeQuestionPage();
+// }
+
+// function makeQuestionPage() {
+//   const qNum = store.questionNumber;
+//   const current = store.questions[qNum - 1];
+//   const correct = store.score;
+//   const incorrect = (qNum - 1) - correct;
+//   return `<div class="question-page">
+//     <h2>${current.question}</h2>
+//     <form>
+//       <label for="question">${current.answers[0]}</label>
+//       <input type="radio" name="question" id="">
+//       <label for="question">${current.answers[1]}</label>
+//       <input type="radio" name="question" id="">
+//       <label for="question">${current.answers[2]}</label>
+//       <input type="radio" name="question" id="">
+//       <label for="question">${current.answers[3]}</label>
+//       <input type="radio" name="question" id="">
+//       <button type="submit">Sumbit</button>
+//     </form>
+//           <p>correct: ${correct} and incorrect: ${incorrect}</p>
+//     </div>`;
+// }
