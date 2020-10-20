@@ -6,3 +6,36 @@
   * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
   *
 */
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.start-page, .question-page, .correct-page, .incorrect-page, .results-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.start-page form {
+  width: 100%;
+}
+
+.start-page form button {
+  width: 100%;
+  height: 50px;
+}
+
+.question-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question-page form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
