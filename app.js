@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * Example store structure
  */
@@ -82,7 +83,13 @@ const store = {
 
 // START PAGE TEMPLATE
 function createStartPage() {
-
+  return `<div class="start-page">
+    <h2>Are you ready?</h2>
+    <form>
+      <button type="submit" >Start</button>
+    </form>
+    </div>`
+  ;
 }
 
 // QUESTION PAGE TEMPLATE
@@ -118,22 +125,49 @@ function createQuestionPage() {
     </form>
           <p>correct: ${correct} and incorrect: ${incorrect}</p>
           <p>Question ${qNum} out of ${total}</p>
-    </div>`;
+    </div>`
+  ;
 }
 
 // CORRECT PAGE TEMPLATE
 function createCorrectPage() {
-
+  return `<div class="correct-page">
+    <h2>Correct!!!</h2>
+    <p>Why you were correct!</p>
+    <form>
+      <button type="submit">Next</button>
+    </form>
+    <p>correct: 0 and incorrect: 0</p>
+    <p>Question 1 of 5</p>
+    </div>`
+  ;
 }
 
 // INCORRECT PAGE TEMPLATE
 function createIncorrectPage() {
-
+  return `<div class="incorrect-page">
+    <h2>Correct!!!</h2>
+    <p>Why you were incorrect...</p>
+    <form>
+      <button type="submit">Next</button>
+    </form>
+    <p>correct: 0 and incorrect: 0</p>
+    <p>Question 1 of 5</p>
+    </div>`
+  ;
 }
 
 // RESULTS PAGE TEMPLATE
 function createResultsPage() {
-  
+  return `<div class="results-page">
+    <h2>Results</h2>
+    <p>correct: 0 and incorrect: 0</p>
+    <p>Question 1 of 5</p>
+    <form>
+      <button type="submit">Next</button>
+    </form>
+    </div>`
+  ;
 }
 
 /********** RENDER FUNCTION(S) **********/
@@ -141,10 +175,8 @@ function createResultsPage() {
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
 // RENDER FUNCTION
 function render() {
-  console.log('Rendering page...');
 
   const renderedString = createRenderString(store);
-  console.log(renderedString);
 
   // insert html into DOM
   $('.display').html(renderedString);
@@ -161,7 +193,7 @@ function createRenderString(obj) {
   if (obj.questionNumber <= obj.questions.length) {
     if (obj.isCorrect === null) {
       // return current question page
-      return createCurrentQuestionPage();
+      return createQuestionPage();
     } else if (obj.isCorrect === true) {
       // return correct page
       return createCorrectPage();
@@ -201,6 +233,7 @@ function handleSubmit() {
 function handleNext() {
   $('.display').on('submit', '#next', function() {
     store.questionNumber++;
+    // change isCorrect to null
     // if there are more questions, display the next question
     // if there aren't any more questions, display the results page
   });
