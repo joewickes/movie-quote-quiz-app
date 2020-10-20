@@ -5,24 +5,54 @@ const store = {
   // 5 or more questions are required
   questions: [
     {
-      question: 'What color is broccoli?',
+      question: 'Nobody puts ___ in a corner',
       answers: [
-        'red',
-        'orange',
-        'pink',
-        'green'
+        'baby',
+        'me',
+        'us',
+        'you'
       ],
-      correctAnswer: 'green'
+      correctAnswer: 'Dirty Dancing',
     },
     {
-      question: 'What is the current year?',
+      question: 'My mama alwyas said life is like a box of ___',
       answers: [
-        '1970',
-        '2015',
-        '2019',
-        '2005'
+        'pasta',
+        'sunshine',
+        'kitens',
+        'chocolate'
       ],
-      correctAnswer: '2019'
+      correctAnswer: 'chocolate'
+    },
+    {
+      question: 'Are you not ___?',
+      answers: [
+        'satisfied',
+        'entertained',
+        'ready',
+        'overwhelmed'
+      ],
+      correctAnswer: 'entertained'
+    },
+    {
+      question: 'May the ___ be with you',
+      answers: [
+        'Force',
+        'Movement',
+        'Momentum',
+        'Inertia'
+      ],
+      correctAnswer: 'Force'
+    },
+    {
+      question: 'You\'re killing me, ___',
+      answers: [
+        'Buddy',
+        'Man',
+        'Smalls',
+        'Biggie'
+      ],
+      correctAnswer: 'Smalls'
     }
   ],
   quizStarted: false,
