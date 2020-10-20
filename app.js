@@ -86,7 +86,7 @@ function createStartPage() {
   return `<div class="start-page">
     <h2>Are you ready?</h2>
     <form>
-      <button type="submit" >Start</button>
+      <button type="submit">Start</button>
     </form>
     </div>`
   ;
@@ -96,16 +96,12 @@ function createStartPage() {
 function createQuestionPage() {
   // The total questions to be asked
   const total = store.questions.length;
-
   // The current questionNumber
   const qNum = store.questionNumber;
-
   // Current question object
   const current = store.questions[qNum - 1];
-
   // The current score (total correct answers)
   const correct = store.score;
-
   // Incorrect score to return
   // (question number - current question) - correctly answered questions
   const incorrect = (qNum - 1) - correct;
@@ -131,38 +127,61 @@ function createQuestionPage() {
 
 // CORRECT PAGE TEMPLATE
 function createCorrectPage() {
+  // The total questions to be asked
+  const total = store.questions.length;
+  // The current score (total correct answers)
+  const correct = store.score;
+  // Incorrect score to return
+  // (question number - current question) - correctly answered questions
+  const incorrect = (qNum - 1) - correct;
+
   return `<div class="correct-page">
     <h2>Correct!!!</h2>
     <p>Why you were correct!</p>
     <form>
       <button type="submit">Next</button>
     </form>
-    <p>correct: 0 and incorrect: 0</p>
-    <p>Question 1 of 5</p>
+    <p>correct: ${correct} and incorrect: ${incorrect}</p>
+    <p>Question ${qNum} out of ${total}</p>
     </div>`
   ;
 }
 
 // INCORRECT PAGE TEMPLATE
 function createIncorrectPage() {
+  // The total questions to be asked
+  const total = store.questions.length;
+  // The current score (total correct answers)
+  const correct = store.score;
+  // Incorrect score to return
+  // (question number - current question) - correctly answered questions
+  const incorrect = (qNum - 1) - correct;
+
   return `<div class="incorrect-page">
     <h2>Correct!!!</h2>
     <p>Why you were incorrect...</p>
     <form>
       <button type="submit">Next</button>
     </form>
-    <p>correct: 0 and incorrect: 0</p>
-    <p>Question 1 of 5</p>
+    <p>correct: ${correct} and incorrect: ${incorrect}</p>
+    <p>Question ${qNum} out of ${total}</p>
     </div>`
   ;
 }
 
 // RESULTS PAGE TEMPLATE
 function createResultsPage() {
+  // The total questions to be asked
+  const total = store.questions.length;
+  // The current score (total correct answers)
+  const correct = store.score;
+  // Incorrect score to return
+  // (question number - current question) - correctly answered questions
+  const incorrect = (qNum - 1) - correct;
+
   return `<div class="results-page">
     <h2>Results</h2>
-    <p>correct: 0 and incorrect: 0</p>
-    <p>Question 1 of 5</p>
+    <p>correct: ${correct} and incorrect: ${incorrect}</p>
     <form>
       <button type="submit">Next</button>
     </form>
