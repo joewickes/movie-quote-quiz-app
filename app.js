@@ -223,7 +223,7 @@ function createResultsPage() {
   <div class="results-page">
     <h2>Results</h2>
     <div>
-      <p>correct: ${correct} and incorrect: ${incorrect}</p>
+      <p>Correct: ${correct} Incorrect: ${incorrect}</p>
     </div>
     <form id="restart">
       <input type="submit" value="Restart">
