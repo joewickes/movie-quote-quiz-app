@@ -85,7 +85,7 @@ const store = {
 function createStartPage() {
   return `<div class="start-page">
     <h2>Are you ready?</h2>
-    <form>
+    <form id="start">
       <button type="submit">Start</button>
     </form>
     </div>`
@@ -108,7 +108,7 @@ function createQuestionPage() {
 
   return `<div class="question-page">
     <h2>${current.question}</h2>
-    <form>
+    <form id="question">
       <label for="question">${current.answers[0]}</label>
       <input type="radio" name="question" id="">
       <label for="question">${current.answers[1]}</label>
@@ -117,7 +117,7 @@ function createQuestionPage() {
       <input type="radio" name="question" id="">
       <label for="question">${current.answers[3]}</label>
       <input type="radio" name="question" id="">
-      <button type="submit">Sumbit</button>
+      <button type="submit">Submit</button>
     </form>
           <p>correct: ${correct} and incorrect: ${incorrect}</p>
           <p>Question ${qNum} out of ${total}</p>
@@ -194,6 +194,10 @@ function createResultsPage() {
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
 // RENDER FUNCTION
 function render() {
+  console.log(store.questionNumber);
+  console.log(store.questions.length);
+  console.log(store.isCorrect);
+  console.log(store.quizStarted);
 
   const renderedString = createRenderString(store);
 
@@ -205,6 +209,7 @@ function render() {
 function createRenderString(obj) {
   if (obj.quizStarted === false) {
     // return start page
+    console.log('Creating Start Page');
     return createStartPage();
   }
 
@@ -212,6 +217,7 @@ function createRenderString(obj) {
   if (obj.questionNumber <= obj.questions.length) {
     if (obj.isCorrect === null) {
       // return current question page
+      console.log('Creating A Question Page');
       return createQuestionPage();
     } else if (obj.isCorrect === true) {
       // return correct page
@@ -232,15 +238,20 @@ function createRenderString(obj) {
 
 // START EVENT HANDLER
 function handleStart() {
-  $('.display').on('submit', '#start', function() {
-    store.quizStarted === true;
+  $('#start').on('submit', function(e) {
+    e.preventDefault();
+    console.log('start handled');
+    store.quizStarted = true;
+    store.questionNumber++;
     render();
   });
 }
 
 // SUBMIT EVENT HANDLER
 function handleSubmit() {
-  $('.display').on('submit', '#question', function() {
+  $('#question').on('submit', function(e) {
+    e.preventDefault();
+    console.log('Question Handled');
     // check current answer against correct answer
     // if the current answer is correct, change isCorrect to true
     // if the current answer is wrong, change isCorrect to false
