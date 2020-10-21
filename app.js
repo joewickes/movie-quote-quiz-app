@@ -279,6 +279,10 @@ function handleStart() {
     store.quizStarted = true;
     store.questionNumber++;
     render();
+    handleStart();
+    handleSubmit();
+    handleNext();
+    handleRestart();
   });
 }
 
@@ -298,6 +302,10 @@ function handleSubmit() {
       store.isCorrect = false;
     }
     render();
+    handleStart();
+    handleSubmit();
+    handleNext();
+    handleRestart();
   });
 }
 
@@ -308,6 +316,10 @@ function handleNext() {
     store.questionNumber++;
     store.isCorrect = null;
     render();
+    handleStart();
+    handleSubmit();
+    handleNext();
+    handleRestart();
   });
 }
 
@@ -318,6 +330,10 @@ function handleRestart() {
     store.questionNumber = 0;
     store.isCorrect = null;
     render();
+    handleStart();
+    handleSubmit();
+    handleNext();
+    handleRestart();
   });
 }
 
@@ -328,6 +344,7 @@ function main() {
   handleStart();
   handleSubmit();
   handleNext();
+  handleRestart();
 }
 
 // Wait for page to load
