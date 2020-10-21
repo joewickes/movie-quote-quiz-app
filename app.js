@@ -86,7 +86,9 @@ function createStartPage() {
   return `<div class="start-page">
     <h2>Are you ready?</h2>
     <form id="start">
-      <button type="submit">Start</button>
+      <div>
+        <input type="submit" value="Let's Go">
+      </div>  
     </form>
     </div>`
   ;
@@ -202,7 +204,7 @@ function render() {
   const renderedString = createRenderString(store);
 
   // insert html into DOM
-  $('.display').html(renderedString);
+  $('main').html(renderedString);
 }
 
 // WHICH TEMPLATE TO DISPLAY
@@ -280,3 +282,107 @@ function main() {
 
 // Wait for page to load
 $(main);
+
+// HTML TEMPLATES
+
+// <!--
+//     <div class="start-page">
+//       <h2>Are you ready?</h2>
+//       <form id="start">
+//         <div>
+//           <input type="submit" value="Let's Go">
+//         </div>  
+//       </form>
+//     </div>
+//     -->
+
+//     <!-- Question Page -->
+//     <!--
+//     <div class="question-page">
+//       <h2>Quote</h2>
+//       <form id="answers">
+//         <div class="radio-questions">
+//           <div>
+//             <input type="radio" name="question" id="">
+//             <label for="question">Thing 1</label>
+//           </div>
+//           <div>
+//             <input type="radio" name="question" id="">
+//             <label for="question">Thing 2</label>
+//           </div>
+//           <div>
+//             <input type="radio" name="question" id="">
+//             <label for="question">Thing 3</label>
+//           </div>
+//           <div>
+//             <input type="radio" name="question" id="">
+//             <label for="question">Thing 4</label>
+//           </div>
+//         </div>
+//         <div>
+//           <input type="submit" value="Submit Answer">
+//         </div>
+//       </form>
+//       <div>
+//         <p>correct: 0 and incorrect: 0</p>
+//       </div>
+//       <div>
+//         <p>Question 1 of 5</p>
+//       </div>
+//     </div>
+    
+
+//     <!-- Correct Page -->
+//     <!--
+//     <div class="correct-page">
+//       <h2>Correct!!!</h2>
+//       <form>
+//         <div class="why">
+//           <p>Why you were correct!</p>
+//         </div>
+//         <div>
+//           <input type="submit" value="Next">
+//         </div>
+//       </form>
+//       <div>
+//         <p>correct: 0 and incorrect: 0</p>
+//       </div>
+//       <div>
+//         <p>Question 1 of 5</p>
+//       </div>
+//     </div>
+//     -->
+
+//     <!-- Incorrect Page -->
+//     <!--
+//     <div class="correct-page">
+//       <h2>Sorry, that's incorrect...</h2>
+//       <form>
+//         <div class="why">
+//           <p>Why you were wrong...</p>
+//         </div>
+//         <div>
+//           <input type="submit" value="Next">
+//         </div>
+//       </form>
+//       <div>
+//         <p>correct: 0 and incorrect: 0</p>
+//       </div>
+//       <div>
+//         <p>Question 1 of 5</p>
+//       </div>
+//     </div>
+//     -->
+
+//     <!-- Results Page -->
+//     <!--
+//     <div class="results-page">
+//       <h2>Results</h2>
+//       <div>
+//         <p>correct: 0 and incorrect: 0</p>
+//       </div>
+//       <form>
+//         <input type="submit" value="Restart">
+//       </form>
+//     </div>
+//     --></div>

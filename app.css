@@ -7,34 +7,60 @@
   *
 */
 
-main {
+* {
+  margin: 0;
+  padding: 0;
+  background-color: #333;
+  color: #FFF;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+h1 {
+  width: 80vw;
+}
+
+.start-page, .question-page, .correct-page, .incorrect-page, .results-page{
+  width: 80vw;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.start-page, .question-page, .correct-page, .incorrect-page, .results-page {
+form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+.radio-questions {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.start-page form {
-  width: 100%;
+.radio-questions div {
+  flex-direction: row;
+  justify-content: center;
 }
 
-.start-page form button {
+input[type=submit] {
   width: 100%;
   height: 50px;
+  background-color: #888;
+  color: #000;
 }
 
-.question-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.question-page form{
+div {
+  width: 100%;
+  margin: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
