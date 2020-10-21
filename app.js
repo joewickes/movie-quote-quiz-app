@@ -295,7 +295,7 @@ function resultsPage() {
 function handleStart (){
   $('#start').on('submit', function(e){
     e.preventDefault();
-    store.quizStarted === true;
+    store.quizStarted = true;
     store.questionNumber++;
     render();
     handleStart();
