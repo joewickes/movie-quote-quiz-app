@@ -270,23 +270,6 @@ function createRenderString(obj) {
 }
 
 
-function resultsPage() {
-  const correct = store.score;
-  
-  const incorrect = questionNumber - correct;
-
-  return `<div class="start-page">
-  <h2>How'd you do?</h2>
-  <div>
-    <p>Correct: ${correct} and Incorrect: ${incorrect}</p> 
-  </div>
-    <form id="restart">
-      <input type="submit" value="Restart">
-    </form>
-  </div>`
-}
-
-
 
 
 /********** EVENT HANDLER FUNCTIONS **********/
@@ -304,7 +287,7 @@ function handleStart (){
     handleSubmit();
     handleNext();
     handleRestart();
-  })
+  });
 }
 
 
@@ -312,7 +295,6 @@ function handleStart (){
 function handleSubmit() {
   $('#answers').on('submit', function(e) {
     e.preventDefault();
-    console.log('Question Handled');
     let answer = $('[type="radio"]:checked').val();
     let correct = store.questions[store.questionNumber - 1].correctAnswer;
     // check current answer against correct answer
