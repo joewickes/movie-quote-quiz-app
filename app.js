@@ -113,7 +113,7 @@ function createQuestionPage() {
     <form id="answers">
       <div class="radio-questions">
         <div>
-          <input type="radio" name="answer" id="" value="${current.answers[0]}">
+          <input type="radio" name="answer" id="" value="${current.answers[0]}" required>
           <label for="answer">${current.answers[0]}</label>
         </div>
         <div>
