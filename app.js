@@ -271,7 +271,6 @@ function createRenderString(obj) {
 
 
 
-
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
