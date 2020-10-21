@@ -87,7 +87,7 @@ function createStartPage() {
     <h2>Are you ready?</h2>
     <form id="start">
       <div>
-        <input type="submit" value="Let's Go">
+        <input type="submit" value="Let's Go!">
       </div>  
     </form>
     </div>`
@@ -267,23 +267,44 @@ function createRenderString(obj) {
   return createResultsPage();
 }
 
+
+function resultsPage() {
+  const correct = store.score;
+  
+  const incorrect = questionNumber - correct;
+
+  return `<div class="start-page">
+  <h2>How'd you do?</h2>
+  <div>
+    <p>Correct: ${correct} and Incorrect: ${incorrect}</p> 
+  </div>
+    <form id="restart">
+      <input type="submit" value="Restart">
+    </form>
+  </div>`
+}
+
+
+
+
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
 
-// START EVENT HANDLER
-function handleStart() {
-  $('#start').on('submit', function(e) {
+
+function handleStart (){
+  $('#start').on('submit', function(e){
     e.preventDefault();
-    store.quizStarted = true;
+    store.quizStarted === true;
     store.questionNumber++;
     render();
     handleStart();
     handleSubmit();
     handleNext();
     handleRestart();
-  });
+  })
 }
+
 
 // SUBMIT EVENT HANDLER
 function handleSubmit() {
@@ -458,3 +479,4 @@ $(main);
 //       </form>
 //     </div>
 //     --></div>
+
