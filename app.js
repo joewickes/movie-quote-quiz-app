@@ -12,7 +12,7 @@ const store = {
         'us',
         'you'
       ],
-      correctAnswer: 'Dirty Dancing',
+      correctAnswer: 'baby',
     },
     {
       question: 'My mama alwyas said life is like a box of ___',
@@ -86,3 +86,45 @@ const store = {
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
+
+// PLAN
+// find out what the current question is 
+// find out what the correct answer is for that question
+// find out what answer the user submitted
+// check to see if the user answer matches the correct answer
+// if user answer matches correct answer - go to correct page
+// if user answer does not match correct answer - go to incorrect page
+//
+
+//PLAN FOR TODAY
+//CREATE A CONTAINER FOR THE CORRECT ANSWERS
+//CREATE A CONTAINER FOR THE INCORRECT ANSWERS
+//CREATE A CONTAINER FOR THE CURRENT QUEATIONS
+//LOOP THROUGH THE QUESTIONS TO PLACE THEM IN THE PROPER CONTAINERS
+
+function checkAnswer(){
+  let correctAnswer = store.questions[store.questionNumber].correctAnswer 
+  let userInput = $('[type="radio"]:checked').val();
+  if (userInput === correctAnswer){
+    $("body").html(`
+      <div class="correct-page">
+        <h2>Correct!!!</h2>
+        <p>Why you were correct!</p>
+        <button class="button">Next</button
+        <p>correct: 0 and incorrect: 0</p>
+        <p>Question 1 of 5</p>
+      </div>
+    `);
+  } else {
+    $("body").html(`
+      <div class="incorrect-page">
+        <h2>Incorrect</h2>
+        <p>Why you were incorrect...</p>
+        <button class="button">Next</button>
+        <p>correct: 0 and incorrect: 0</p>
+        <p>Question 1 of 5</p>
+      </div>
+    `)
+  }
+}
