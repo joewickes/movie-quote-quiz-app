@@ -6,7 +6,7 @@ const store = {
   // 5 or more questions are required
   questions: [
     {
-      question: '"Nobody puts ___ in a corner"',
+      question: '"Nobody puts ___ in the corner"',
       answers: [
         'baby',
         'me',
@@ -14,6 +14,7 @@ const store = {
         'you'
       ],
       correctAnswer: 'baby',
+      gif: '<iframe src="https://giphy.com/embed/xT4uQvlimIaKezWhna" width="100%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>',
     },
     {
       question: '"My mama always said life is like a box of ___"',
@@ -23,7 +24,8 @@ const store = {
         'kittens',
         'chocolates'
       ],
-      correctAnswer: 'chocolates'
+      correctAnswer: 'chocolates',
+      gif: '<iframe src="https://giphy.com/embed/SYKPTDru6lWnfeovnI" width="100%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>'
     },
     {
       question: '"Are you not ___?"',
@@ -33,7 +35,8 @@ const store = {
         'ready',
         'overwhelmed'
       ],
-      correctAnswer: 'entertained'
+      correctAnswer: 'entertained',
+      gif: '<iframe src="https://giphy.com/embed/hrnYspWWhsIyA" width="100%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>',
     },
     {
       question: '"May the ___ be with you"',
@@ -43,7 +46,8 @@ const store = {
         'Momentum',
         'Inertia'
       ],
-      correctAnswer: 'Force'
+      correctAnswer: 'Force',
+      gif: '<iframe src="https://giphy.com/embed/JDnaQ8qn0Myuk" width="100%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>',
     },
     {
       question: '"You\'re killing me, ___"',
@@ -53,13 +57,16 @@ const store = {
         'Smalls',
         'Biggie'
       ],
-      correctAnswer: 'Smalls'
+      correctAnswer: 'Smalls',
+      gif: '<iframe src="https://giphy.com/embed/13sqPdcVsNQVsA" width="100%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>',
     }
   ],
   quizStarted: false,
   questionNumber: 0,
   score: 0,
   isCorrect: null,
+  sadGif: '<iframe src="https://giphy.com/embed/2WxWfiavndgcM" width="100%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>',
+  endGif: '<iframe src="https://giphy.com/embed/LgwoVr7YgUkrC" width="100%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>',
 };
 
 /**
@@ -111,7 +118,7 @@ function createQuestionPage() {
   return `<div class="question-page">
     <h2>${current.question}</h2>
     <form id="answers">
-      <div class="radio-questions">
+      <div class="radio-answers">
         <div>
           <input type="radio" name="answer" id="" value="${current.answers[0]}" required>
           <label for="answer">${current.answers[0]}</label>
@@ -129,12 +136,12 @@ function createQuestionPage() {
           <label for="answer">${current.answers[3]}</label>
         </div>
       </div>
-      <div>
+      <div class="button">
         <input type="submit" value="Submit Answer">
       </div>
     </form>
     <div>
-      <p>correct: ${correct} and incorrect: ${incorrect}</p>
+      <p>Correct: ${correct} Incorrect: ${incorrect}</p>
     </div>
     <div>
       <p>Question ${qNum} out of ${total}</p>
@@ -158,6 +165,7 @@ function createCorrectPage() {
 
   return `<div class="correct-page">
     <h2>Correct!!!</h2>
+    ${store.questions[qNum -1].gif}
     <form id="next">
       <div class="why">
         <p>The answer "${correctA}" was right!</p>
@@ -167,7 +175,7 @@ function createCorrectPage() {
       </div>
     </form>
     <div>
-      <p>Correct: ${correct}     Incorrect: ${incorrect}</p>
+      <p>Correct: ${correct} Incorrect: ${incorrect}</p>
     </div>
     <div>
       <p>Question ${qNum} out of ${total}</p>
@@ -191,9 +199,10 @@ function createIncorrectPage() {
 
   return `<div class="correct-page">
     <h2>Sorry, that's incorrect...</h2>
+    ${store.sadGif}
     <form id="next">
       <div class="why">
-        <p>The correct answer was ${correctA}.</p>
+        <p>The correct answer was "${correctA}."</p>
       </div>
       <div>
         <input type="submit" value="Next">
@@ -221,6 +230,7 @@ function createResultsPage() {
 
   return `<div class="results-page">
   <div class="results-page">
+    ${store.endGif}
     <h2>Results</h2>
     <div>
       <p>Correct: ${correct} Incorrect: ${incorrect}</p>
