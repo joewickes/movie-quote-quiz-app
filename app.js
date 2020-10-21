@@ -6,7 +6,7 @@ const store = {
   // 5 or more questions are required
   questions: [
     {
-      question: 'Nobody puts ___ in a corner',
+      question: '"Nobody puts ___ in a corner"',
       answers: [
         'baby',
         'me',
@@ -16,7 +16,7 @@ const store = {
       correctAnswer: 'Dirty Dancing',
     },
     {
-      question: 'My mama alwyas said life is like a box of ___',
+      question: '"My mama alwyas said life is like a box of ___"',
       answers: [
         'pasta',
         'sunshine',
@@ -26,7 +26,7 @@ const store = {
       correctAnswer: 'chocolate'
     },
     {
-      question: 'Are you not ___?',
+      question: '"Are you not ___?"',
       answers: [
         'satisfied',
         'entertained',
@@ -36,7 +36,7 @@ const store = {
       correctAnswer: 'entertained'
     },
     {
-      question: 'May the ___ be with you',
+      question: '"May the ___ be with you"',
       answers: [
         'Force',
         'Movement',
@@ -46,7 +46,7 @@ const store = {
       correctAnswer: 'Force'
     },
     {
-      question: 'You\'re killing me, ___',
+      question: '"You\'re killing me, ___"',
       answers: [
         'Buddy',
         'Man',
@@ -110,19 +110,35 @@ function createQuestionPage() {
 
   return `<div class="question-page">
     <h2>${current.question}</h2>
-    <form id="question">
-      <label for="question">${current.answers[0]}</label>
-      <input type="radio" name="question" id="">
-      <label for="question">${current.answers[1]}</label>
-      <input type="radio" name="question" id="">
-      <label for="question">${current.answers[2]}</label>
-      <input type="radio" name="question" id="">
-      <label for="question">${current.answers[3]}</label>
-      <input type="radio" name="question" id="">
-      <button type="submit">Submit</button>
+    <form id="answers">
+      <div class="radio-questions">
+        <div>
+          <input type="radio" name="question" id="">
+          <label for="question">${current.answers[0]}</label>
+        </div>
+        <div>
+          <input type="radio" name="question" id="">
+          <label for="question">${current.answers[1]}</label>
+        </div>
+        <div>
+          <input type="radio" name="question" id="">
+          <label for="question">${current.answers[2]}</label>
+        </div>
+        <div>
+          <input type="radio" name="question" id="">
+          <label for="question">${current.answers[3]}</label>
+        </div>
+      </div>
+      <div>
+        <input type="submit" value="Submit Answer">
+      </div>
     </form>
-          <p>correct: ${correct} and incorrect: ${incorrect}</p>
-          <p>Question ${qNum} out of ${total}</p>
+    <div>
+      <p>correct: ${correct} and incorrect: ${incorrect}</p>
+    </div>
+    <div>
+      <p>Question ${qNum} out of ${total}</p>
+    </div>
     </div>`
   ;
 }
@@ -139,12 +155,20 @@ function createCorrectPage() {
 
   return `<div class="correct-page">
     <h2>Correct!!!</h2>
-    <p>Why you were correct!</p>
-    <form>
-      <button type="submit">Next</button>
+    <form id="next">
+      <div class="why">
+        <p>Why you were correct!</p>
+      </div>
+      <div>
+        <input type="submit" value="Next">
+      </div>
     </form>
-    <p>correct: ${correct} and incorrect: ${incorrect}</p>
-    <p>Question ${qNum} out of ${total}</p>
+    <div>
+      <p>correct: ${correct} and incorrect: ${incorrect}</p>
+    </div>
+    <div>
+      <p>Question ${qNum} out of ${total}</p>
+    </div>
     </div>`
   ;
 }
@@ -157,35 +181,44 @@ function createIncorrectPage() {
   const correct = store.score;
   // Incorrect score to return
   // (question number - current question) - correctly answered questions
-  const incorrect = (qNum - 1) - correct;
+  const incorrect = (qNum) - correct;
 
-  return `<div class="incorrect-page">
-    <h2>Correct!!!</h2>
-    <p>Why you were incorrect...</p>
-    <form>
-      <button type="submit">Next</button>
+  return `<div class="correct-page">
+    <h2>Sorry, that's incorrect...</h2>
+    <form id="next">
+      <div class="why">
+        <p>Why you were wrong...</p>
+      </div>
+      <div>
+        <input type="submit" value="Next">
+      </div>
     </form>
-    <p>correct: ${correct} and incorrect: ${incorrect}</p>
-    <p>Question ${qNum} out of ${total}</p>
+    <div>
+      <p>correct: ${correct} and incorrect: ${incorrect}</p>
+    </div>
+    <div>
+      <p>Question ${qNum} out of ${total}</p>
+    </div>
     </div>`
   ;
 }
 
 // RESULTS PAGE TEMPLATE
 function createResultsPage() {
-  // The total questions to be asked
-  const total = store.questions.length;
   // The current score (total correct answers)
   const correct = store.score;
   // Incorrect score to return
   // (question number - current question) - correctly answered questions
-  const incorrect = (qNum - 1) - correct;
+  const incorrect = (qNum) - correct;
 
   return `<div class="results-page">
+  <div class="results-page">
     <h2>Results</h2>
-    <p>correct: ${correct} and incorrect: ${incorrect}</p>
-    <form>
-      <button type="submit">Next</button>
+    <div>
+      <p>correct: ${correct} and incorrect: ${incorrect}</p>
+    </div>
+    <form id="restart">
+      <input type="submit" value="Restart">
     </form>
     </div>`
   ;
@@ -251,23 +284,40 @@ function handleStart() {
 
 // SUBMIT EVENT HANDLER
 function handleSubmit() {
-  $('#question').on('submit', function(e) {
+  $('#answers').on('submit', function(e) {
     e.preventDefault();
     console.log('Question Handled');
     // check current answer against correct answer
     // if the current answer is correct, change isCorrect to true
+    if (e.currentTarget.val() === store.questions.question[questionNumber - 1].correctAnswer) {
+      store.isCorrect = true;
+      store.score++;
+    }
     // if the current answer is wrong, change isCorrect to false
+    if (e.currentTarget.val() !== store.questions.question[questionNumber - 1].correctAnswer) {
+      store.isCorrect = false;
+    }
     render();
   });
 }
 
 // NEXT EVENT HANDLER
 function handleNext() {
-  $('.display').on('submit', '#next', function() {
+  $('#next').on('submit', function(e) {
+    e.preventDefault();
     store.questionNumber++;
-    // change isCorrect to null
-    // if there are more questions, display the next question
-    // if there aren't any more questions, display the results page
+    store.isCorrect = null;
+    render();
+  });
+}
+
+// RESTART EVENT HANDLER
+function handleRestart() {
+  $('#restart').on('submit', function(e) {
+    e.preventDefault();
+    store.questionNumber = 0;
+    store.isCorrect = null;
+    render();
   });
 }
 
