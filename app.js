@@ -13,17 +13,17 @@ const store = {
         'us',
         'you'
       ],
-      correctAnswer: 'Dirty Dancing',
+      correctAnswer: 'baby',
     },
     {
-      question: '"My mama alwyas said life is like a box of ___"',
+      question: '"My mama always said life is like a box of ___"',
       answers: [
         'pasta',
         'sunshine',
-        'kitens',
-        'chocolate'
+        'kittens',
+        'chocolates'
       ],
-      correctAnswer: 'chocolate'
+      correctAnswer: 'chocolates'
     },
     {
       question: '"Are you not ___?"',
@@ -113,20 +113,20 @@ function createQuestionPage() {
     <form id="answers">
       <div class="radio-questions">
         <div>
-          <input type="radio" name="question" id="">
-          <label for="question">${current.answers[0]}</label>
+          <input type="radio" name="answer" id="" value="${current.answers[0]}">
+          <label for="answer">${current.answers[0]}</label>
         </div>
         <div>
-          <input type="radio" name="question" id="">
-          <label for="question">${current.answers[1]}</label>
+          <input type="radio" name="answer" id="" value="${current.answers[1]}">
+          <label for="answer">${current.answers[1]}</label>
         </div>
         <div>
-          <input type="radio" name="question" id="">
-          <label for="question">${current.answers[2]}</label>
+          <input type="radio" name="answer" id="" value="${current.answers[2]}">
+          <label for="answer">${current.answers[2]}</label>
         </div>
         <div>
-          <input type="radio" name="question" id="">
-          <label for="question">${current.answers[3]}</label>
+          <input type="radio" name="answer" id="" value="${current.answers[3]}">
+          <label for="answer">${current.answers[3]}</label>
         </div>
       </div>
       <div>
@@ -145,13 +145,15 @@ function createQuestionPage() {
 
 // CORRECT PAGE TEMPLATE
 function createCorrectPage() {
+  // The current questionNumber
+  const qNum = store.questionNumber;
   // The total questions to be asked
   const total = store.questions.length;
   // The current score (total correct answers)
   const correct = store.score;
   // Incorrect score to return
   // (question number - current question) - correctly answered questions
-  const incorrect = (qNum - 1) - correct;
+  const incorrect = (qNum) - correct;
 
   return `<div class="correct-page">
     <h2>Correct!!!</h2>
@@ -175,6 +177,8 @@ function createCorrectPage() {
 
 // INCORRECT PAGE TEMPLATE
 function createIncorrectPage() {
+  // The current questionNumber
+  const qNum = store.questionNumber;
   // The total questions to be asked
   const total = store.questions.length;
   // The current score (total correct answers)
@@ -205,11 +209,13 @@ function createIncorrectPage() {
 
 // RESULTS PAGE TEMPLATE
 function createResultsPage() {
+  // The current questionNumber
+  const qNum = store.questionNumber;
   // The current score (total correct answers)
   const correct = store.score;
   // Incorrect score to return
   // (question number - current question) - correctly answered questions
-  const incorrect = (qNum) - correct;
+  const incorrect = (qNum - 1) - correct;
 
   return `<div class="results-page">
   <div class="results-page">
@@ -229,10 +235,6 @@ function createResultsPage() {
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
 // RENDER FUNCTION
 function render() {
-  console.log(store.questionNumber);
-  console.log(store.questions.length);
-  console.log(store.isCorrect);
-  console.log(store.quizStarted);
 
   const renderedString = createRenderString(store);
 
@@ -244,7 +246,6 @@ function render() {
 function createRenderString(obj) {
   if (obj.quizStarted === false) {
     // return start page
-    console.log('Creating Start Page');
     return createStartPage();
   }
 
@@ -252,7 +253,6 @@ function createRenderString(obj) {
   if (obj.questionNumber <= obj.questions.length) {
     if (obj.isCorrect === null) {
       // return current question page
-      console.log('Creating A Question Page');
       return createQuestionPage();
     } else if (obj.isCorrect === true) {
       // return correct page
@@ -275,7 +275,6 @@ function createRenderString(obj) {
 function handleStart() {
   $('#start').on('submit', function(e) {
     e.preventDefault();
-    console.log('start handled');
     store.quizStarted = true;
     store.questionNumber++;
     render();
@@ -291,16 +290,21 @@ function handleSubmit() {
   $('#answers').on('submit', function(e) {
     e.preventDefault();
     console.log('Question Handled');
+    let answer = $('input[name=\'answer\']:checked').val();
+    let currentQuestionIndex = store.questionNumber - 1;
+    let correct = store.questions[currentQuestionIndex].correctAnswer;
     // check current answer against correct answer
     // if the current answer is correct, change isCorrect to true
-    if (e.currentTarget.val() === store.questions.question[questionNumber - 1].correctAnswer) {
+    if (answer === correct) {
       store.isCorrect = true;
       store.score++;
     }
     // if the current answer is wrong, change isCorrect to false
-    if (e.currentTarget.val() !== store.questions.question[questionNumber - 1].correctAnswer) {
+    if (answer !== correct) {
       store.isCorrect = false;
     }
+    
+    
     render();
     handleStart();
     handleSubmit();
@@ -327,7 +331,8 @@ function handleNext() {
 function handleRestart() {
   $('#restart').on('submit', function(e) {
     e.preventDefault();
-    store.questionNumber = 0;
+    store.questionNumber = 1;
+    store.score = 0;
     store.isCorrect = null;
     render();
     handleStart();
