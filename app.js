@@ -107,7 +107,21 @@ function handleStartPage (){
 }
 
 
+function resultsPage() {
+  const correct = store.score;
+  
+  const incorrect = questionNumber - correct;
 
+  return `<div class="start-page">
+  <h2>How'd you do?</h2>
+  <div>
+    <p>Correct: ${correct} and Incorrect: ${incorrect}</p> 
+  </div>
+    <form id="restart">
+      <input type="submit" value="Restart">
+    </form>
+  </div>`
+}
 
 
 
