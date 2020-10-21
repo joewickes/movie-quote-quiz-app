@@ -154,19 +154,20 @@ function createCorrectPage() {
   // Incorrect score to return
   // (question number - current question) - correctly answered questions
   const incorrect = (qNum) - correct;
+  let correctA = store.questions[store.questionNumber - 1].correctAnswer;
 
   return `<div class="correct-page">
     <h2>Correct!!!</h2>
     <form id="next">
       <div class="why">
-        <p>Why you were correct!</p>
+        <p>The answer "${correctA}" was right!</p>
       </div>
       <div>
         <input type="submit" value="Next">
       </div>
     </form>
     <div>
-      <p>correct: ${correct} and incorrect: ${incorrect}</p>
+      <p>Correct: ${correct}     Incorrect: ${incorrect}</p>
     </div>
     <div>
       <p>Question ${qNum} out of ${total}</p>
@@ -186,19 +187,20 @@ function createIncorrectPage() {
   // Incorrect score to return
   // (question number - current question) - correctly answered questions
   const incorrect = (qNum) - correct;
+  let correctA = store.questions[store.questionNumber - 1].correctAnswer;
 
   return `<div class="correct-page">
     <h2>Sorry, that's incorrect...</h2>
     <form id="next">
       <div class="why">
-        <p>Why you were wrong...</p>
+        <p>The correct answer was ${correctA}.</p>
       </div>
       <div>
         <input type="submit" value="Next">
       </div>
     </form>
     <div>
-      <p>correct: ${correct} and incorrect: ${incorrect}</p>
+      <p>Correct: ${correct} Incorrect: ${incorrect}</p>
     </div>
     <div>
       <p>Question ${qNum} out of ${total}</p>
