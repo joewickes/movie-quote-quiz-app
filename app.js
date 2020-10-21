@@ -311,9 +311,8 @@ function handleSubmit() {
   $('#answers').on('submit', function(e) {
     e.preventDefault();
     console.log('Question Handled');
-    let answer = $('input[name=\'answer\']:checked').val();
-    let currentQuestionIndex = store.questionNumber - 1;
-    let correct = store.questions[currentQuestionIndex].correctAnswer;
+    let answer = $('[type="radio"]:checked').val();
+    let correct = store.questions[store.questionNumber - 1].correctAnswer;
     // check current answer against correct answer
     // if the current answer is correct, change isCorrect to true
     if (answer === correct) {
@@ -479,4 +478,5 @@ $(main);
 //       </form>
 //     </div>
 //     --></div>
+
 
