@@ -1,9 +1,9 @@
 # Movie Quote Quiz App
 
-## Abstract
+## Summary
 Thinkful Engineering Immersion project to practice jQuery, templates, and render functionality (React-like as we move towards the React curriculum).
 
-## Contributors
+## Contributors/Team
 Quiana Lee, Kareine Elecanal, and Joe Wickes
 
 ## User Features/Stories
